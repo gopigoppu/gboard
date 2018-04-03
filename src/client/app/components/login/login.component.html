@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="login-container">
+    <div id="output"></div>
+    <div class="avatar"></div>
+    <div class="form-box">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+        <input name="username" ngModel type="text" placeholder="username" required>
+
+        <input type="password" name="password" ngModel placeholder="password" required>
+        <input type="submit" hidden>
+        <button class="btn btn-info btn-block login" [disabled]="!loginForm.form.valid" type="button" (click)="login(loginForm.value)">Login</button>
+
+      </form>
+
+      <div class="clearfix">
+        <button id="login_lost_btn" type="button" class="btn btn-link float-left">Lost Password?</button>
+        <button id="login_register_btn" type="button" class="btn btn-link float-right">Register</button>
+      </div>
+    </div>
+  </div>
+
+</div>
