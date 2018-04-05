@@ -7,8 +7,8 @@ const path = require('path');
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -51,3 +51,23 @@ app.post('/api/users', (req, res) => {
     return res.status(201).json(newRecord);
   })
 });
+
+app.post('/api/login', (req, res) => {
+  const userData = req.body;
+  console.log(userData);
+  const usersCollection = database.collection('users');
+
+  usersCollection.find({}).toArray((err, docs) => {
+    //return res.status(201).json(docs);
+    for (item of docs) {
+      if ((item.username === userData.username) && (item.password === userData.password)) {
+        return res.status(201).json('success');
+      } else {
+        return res.status(201).json("fail");
+      }
+    }
+  });
+
+
+});
+
