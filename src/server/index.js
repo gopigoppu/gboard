@@ -53,6 +53,7 @@ app.post('/api/users', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
+  // return res.status(500).json('Error retrieving records');
   const userData = req.body;
   console.log(userData);
   const usersCollection = database.collection('users');

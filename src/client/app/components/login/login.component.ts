@@ -14,8 +14,9 @@ export class LoginComponent implements OnInit {
   login(formFields) {
     console.log(formFields);
 
-    this.apiService.login(formFields).subscribe((data: any) => {
-      console.log(data);
+    this.apiService.login(formFields).subscribe((result: any) => {
+      console.log(result);
+      const data = result.body;
       if (data === 'success') {
         this.router.navigate(['/dashboard']);
       }
