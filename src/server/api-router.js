@@ -1,4 +1,6 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 function apiRouter(database) {
   const router = express.Router();
@@ -28,20 +30,34 @@ function apiRouter(database) {
 
   router.post('/login', (req, res) => {
     // return res.status(500).json('Error retrieving records');
-    const userData = req.body;
-    console.log(userData);
+    const user = req.body;
+    console.log(user);
     const usersCollection = database.collection('users');
-    usersCollection.find({}).toArray((err, docs) => {
-      //return res.status(201).json(docs);
-      for (item of docs) {
-        if ((item.username === userData.username) && (item.password === userData.password)) {
-          return res.status(201).json('success');
-        } else {
-          return res.status(201).json("fail");
-        }
+
+    usersCollection.findOne({ username: user.username }, (err, result) => {
+      if (!result) {
+        return res.status(404).json({ error: 'user not found' });
       }
-    });
+      console.log(result);
+      console.log('bcrypt : ', bcrypt.hashSync('gopi', 10));
+
+      if (!bcrypt.compareSync(user.password, result.password)) {
+        return res.status(401).json({ error: 'incorrect password' });
+      }
+
+      const payload = {
+        username: result.username
+      };
+
+      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
+
+      return res.json({
+        message: 'successfully authenticated',
+        token: token
+      });
+    })
   });
+
 
   return router;
 

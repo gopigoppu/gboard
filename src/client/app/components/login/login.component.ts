@@ -16,8 +16,9 @@ export class LoginComponent implements OnInit {
 
     this.apiService.login(formFields).subscribe((result: any) => {
       console.log(result);
-      const data = result.body;
-      if (data === 'success') {
+      const response = result.body;
+      if (response.message) {
+        localStorage.setItem('accessToken', response.token);
         this.router.navigate(['/dashboard']);
       }
     });
