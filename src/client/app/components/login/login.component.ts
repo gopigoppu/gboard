@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,22 +10,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router,
+    private authService: AuthService) { }
 
   login(formFields) {
     console.log(formFields);
 
     this.apiService.login(formFields).subscribe((result: any) => {
       console.log(result);
-      const response = result.body;
-      if (response.message) {
-        localStorage.setItem('accessToken', response.token);
+      // const response = result.body;
+      if (result.message) {
+        this.authService.setToken(result.token);
+        // localStorage.setItem('accessToken', result.token);
         this.router.navigate(['/dashboard']);
       }
     });
   }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
 }

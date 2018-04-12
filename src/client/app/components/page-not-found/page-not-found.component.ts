@@ -14,7 +14,7 @@ export class PageNotFoundComponent implements OnInit {
   }
 
   backToHome() {
-    this.router.navigate(['login']);
+    this.router.navigate(['dashboard']);
   }
 
 }

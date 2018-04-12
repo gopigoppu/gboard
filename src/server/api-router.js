@@ -1,9 +1,20 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const checkJwt = require('express-jwt');
 
 function apiRouter(database) {
   const router = express.Router();
+
+  router.use(
+    checkJwt({ secret: process.env.JWT_SECRET }).unless({ path: '/api/login' })
+  );
+
+  router.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).send({ error: err.message });
+    }
+  });
 
   router.get('/users', (req, res) => {
     const usersCollection = database.collection('users');
@@ -11,8 +22,6 @@ function apiRouter(database) {
       return res.json(docs);
     });
   });
-
-
 
   router.post('/users', (req, res) => {
     const user = req.body;

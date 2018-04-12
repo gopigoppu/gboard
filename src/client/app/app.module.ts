@@ -16,6 +16,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 import { ApiService } from './shared/api.service';
+import { AuthService } from './shared/auth/auth.service';
+import { AuthGuard } from './shared/guard/auth.guard';
+
 
 
 @NgModule({
@@ -34,7 +37,7 @@ import { ApiService } from './shared/api.service';
     NgHttpLoaderModule,
     FormsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

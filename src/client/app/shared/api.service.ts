@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpErrorResponse } f
 import { environment } from '../../environments/environment.prod';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError } from 'rxjs/operators/catchError';
+import { AuthService } from './auth/auth.service';
 
 
 @Injectable()
@@ -10,7 +11,7 @@ export class ApiService {
 
   private baseUrl = environment.baseApiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   login(formFields) {
     return this.post('login', formFields);
@@ -40,9 +41,11 @@ export class ApiService {
   request(url: string, method: string, body?: Object) {
     const apiUrl = `${this.baseUrl}/${url}`;
     const httpOptions = new HttpHeaders({
-      'Content-Type': 'application/json'
-      // 'Authorization': 'my-auth-token'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.authService.getToken()}`
     });
+
+    // httpOptions.append('Authorization', `Bearer ${this.authService.getToken()}`);
     const params = new HttpParams();
     // const request = new HttpRequest(method, apiUrl, httpOptions);
     // const requestOptions = request.clone({
@@ -50,7 +53,7 @@ export class ApiService {
     // });
     const options: Object = {
       headers: httpOptions,
-      observe: 'response', // to display the full response & as 'body' for type cast
+      //   observe: 'response' as 'body', // to display the full response & as 'body' for type cast
       responseType: 'json'
     };
     if (body) {

@@ -1,6 +1,11 @@
 <nav class="navbar navbar-light bg-light">
-  <div routerLink="/login" class="home-icon">
+  <div routerLink="/dashboard" class="home-icon">
     <i class="fas fa-home"></i>
     <span>GBoard</span>
   </div>
+
+  <div>
+    <button type="button" class="btn btn-info" (click)=logout() *ngIf="authService.isLoggedIn()">Logout</button>
+  </div>
+
 </nav>
