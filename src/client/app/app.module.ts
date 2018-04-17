@@ -18,6 +18,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ApiService } from './shared/api.service';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { ListComponent } from './components/list/list.component';
 
 
 
@@ -28,7 +29,8 @@ import { AuthGuard } from './shared/guard/auth.guard';
     HeaderComponent,
     LoginComponent,
     SignupComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
