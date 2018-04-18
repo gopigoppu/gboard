@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +20,8 @@ import { ApiService } from './shared/api.service';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { ListComponent } from './components/list/list.component';
+import { BoardsComponent } from './components/boards/boards.component';
+import { PopupComponent } from './shared/modal/popup/popup.component';
 
 
 
@@ -30,14 +33,17 @@ import { ListComponent } from './components/list/list.component';
     LoginComponent,
     SignupComponent,
     PageNotFoundComponent,
-    ListComponent
+    ListComponent,
+    BoardsComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgHttpLoaderModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [ApiService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

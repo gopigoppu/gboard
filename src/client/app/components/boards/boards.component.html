@@ -1,0 +1,14 @@
+<div class="container-fluid board-container">
+  <div class="board col-sm-6 col-md-4 col-lg-3 col-xl-3">
+    <div class="board-content" (click)="showCreateBoardPopup = !showCreateBoardPopup">
+      Add New Board
+      <i class="fas fa-plus-square"></i>
+    </div>
+  </div>
+</div>
+
+
+<app-popup [(visible)]="showCreateBoardPopup">
+  <input type="text" name="board" placeholder="Board Name" #newBoard>
+  <button (click)="createBoard(newBoard.value)"> Create Board</button>
+</app-popup>

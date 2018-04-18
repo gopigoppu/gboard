@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
+  isAddList = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -14,10 +16,20 @@ export class ListComponent implements OnInit {
 
   addNewList() {
     console.log('addNewList');
+    this.isAddList = !this.isAddList;
   }
 
   addList(list) {
-    console.log(list);
+    console.log(list.list);
+    if (!list.list) {
+      return;
+    }
+    this.isAddList = !this.isAddList;
+  }
+
+  removeList() {
+    console.log('removeList');
+    this.isAddList = !this.isAddList;
   }
 
 }

@@ -1,0 +1,27 @@
+.board-container{
+  margin-top: 10px;
+}
+
+.board{
+  width: 300px;
+  background-color: #dedede;
+  height: 100px;
+  border: 1px;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.board-content{
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  height: 24px;
+  width: 66%;
+  font-size: 20px;
+  color: #7c8084;
+}
