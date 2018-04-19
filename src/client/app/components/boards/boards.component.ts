@@ -33,6 +33,7 @@ export class BoardsComponent implements OnInit {
 
     this.apiService.createBoard(board).subscribe((result: any) => {
       console.log(result);
+      this.boards.push(result);
     });
   }
 
