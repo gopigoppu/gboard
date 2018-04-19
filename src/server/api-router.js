@@ -37,6 +37,28 @@ function apiRouter(database) {
     })
   });
 
+  router.get('/boards', (req, res) => {
+    const boardsCollection = database.collection('boards');
+    boardsCollection.find({}).toArray((err, docs) => {
+      return res.json(docs);
+    });
+  });
+
+  router.post('/board', (req, res) => {
+    const board = req.body;
+    console.log(board);
+    const boardsCollection = database.collection('boards');
+    boardsCollection.insertOne(board, (err, r) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error inserting new board.' });
+      }
+
+      console.log(r);
+      const newRecord = r.ops[0];
+      return res.status(201).json(newRecord);
+    })
+  })
+
   router.post('/login', (req, res) => {
     // return res.status(500).json('Error retrieving records');
     const user = req.body;
@@ -62,7 +84,9 @@ function apiRouter(database) {
 
       return res.json({
         message: 'successfully authenticated',
-        token: token
+        token: token,
+        userid: result._id,
+        user: result.username
       });
     })
   });

@@ -17,12 +17,26 @@ export class AuthService {
     return localStorage.getItem(this.storageKey);
   }
 
+  setUserInfo(userinfo) {
+    localStorage.setItem('user', userinfo.user);
+    localStorage.setItem('userid', userinfo.userid);
+  }
+
+  getUsername() {
+    return localStorage.getItem('user');
+  }
+
+  getUserId() {
+    return localStorage.getItem('userid');
+  }
+
   isLoggedIn() {
     return this.getToken() !== null;
   }
 
   logout() {
-    localStorage.removeItem(this.storageKey);
+    // localStorage.removeItem(this.storageKey);
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 

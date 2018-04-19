@@ -17,6 +17,10 @@ export class ApiService {
     return this.post('login', formFields);
   }
 
+  createBoard(board) {
+    return this.post('board', board);
+  }
+
 
 
   get(url: string) {

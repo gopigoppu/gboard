@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
       // const response = result.body;
       if (result.message) {
         this.authService.setToken(result.token);
+        this.authService.setUserInfo(result);
         // localStorage.setItem('accessToken', result.token);
         this.router.navigate(['/dashboard']);
       }
