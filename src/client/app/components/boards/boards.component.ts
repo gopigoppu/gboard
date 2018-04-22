@@ -17,7 +17,7 @@ export class BoardsComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.get('boards').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.boards = data;
     });
 

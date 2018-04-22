@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -8,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ListComponent implements OnInit {
 
   isAddList = false;
+  boardId: any;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(res => {
+      this.boardId = res.id;
+      console.log(this.boardId);
+    });
   }
 
   addNewList() {

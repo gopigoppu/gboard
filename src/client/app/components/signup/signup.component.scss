@@ -1,0 +1,25 @@
+.well
+{
+  padding: 35px;
+  padding-left: 30px;
+  -webkit-box-shadow: 0 0 10px #666666;
+  box-shadow: 0 0 10px #b53b3b, 0 0 10px #24ce4d, 0 0 10px #c72d2d;
+  margin: 4% auto 0;
+  background-color: transparent;
+}
+
+
+.input-group-addon
+{
+  background-color: #ffde6c;
+  color: #d17d00;
+}
+
+.well input{
+  border: 1px;
+  border-radius: 5px;
+}
+
+.well button{
+  margin-top: 5px;
+}
