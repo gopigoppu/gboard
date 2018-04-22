@@ -4,8 +4,11 @@
     <span>GBoard</span>
   </div>
 
-  <div>
-    <button type="button" class="btn btn-info" (click)=logout() *ngIf="authService.isLoggedIn()">Logout</button>
+  <div *ngIf="authService.isLoggedIn()">
+    <div class="welcomeUser">
+      Welcome {{username}} !
+    </div>
+    <button type="button" class="btn btn-info" (click)=logout()>Logout</button>
   </div>
 
 </nav>

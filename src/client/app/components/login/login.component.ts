@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/auth/auth.service';
+import { GeneralService } from '../../shared/common/general.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { AuthService } from '../../shared/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(private apiService: ApiService, private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService, private generalService: GeneralService) { }
 
   login(formFields) {
     console.log(formFields);
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
         this.authService.setToken(result.token);
         this.authService.setUserInfo(result);
         // localStorage.setItem('accessToken', result.token);
+        this.generalService.username = result.user;
         this.router.navigate(['/dashboard']);
       }
     });

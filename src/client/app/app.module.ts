@@ -22,6 +22,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { ListComponent } from './components/list/list.component';
 import { BoardsComponent } from './components/boards/boards.component';
 import { PopupComponent } from './shared/modal/popup/popup.component';
+import { GeneralService } from './shared/common/general.service';
 
 
 
@@ -45,7 +46,12 @@ import { PopupComponent } from './shared/modal/popup/popup.component';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiService, AuthService, AuthGuard],
+  providers: [
+    ApiService,
+    AuthService,
+    AuthGuard,
+    GeneralService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

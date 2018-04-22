@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { AuthService } from '../../shared/auth/auth.service';
+import { GeneralService } from '../../shared/common/general.service';
 
 @Component({
   selector: 'app-boards',
@@ -12,7 +13,7 @@ export class BoardsComponent implements OnInit {
   showCreateBoardPopup = false;
   boards: any;
 
-  constructor(private apiService: ApiService, private authService: AuthService) { }
+  constructor(private apiService: ApiService, private authService: AuthService, private generalService: GeneralService) { }
 
   ngOnInit() {
     this.apiService.get('boards').subscribe(data => {
@@ -35,6 +36,9 @@ export class BoardsComponent implements OnInit {
       console.log(result);
       this.boards.push(result);
     });
+    // localStorage.setItem('user', boardName);
+
+    // this.generalService.username = boardName;
   }
 
 }

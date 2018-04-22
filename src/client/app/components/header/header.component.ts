@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth/auth.service';
+import { GeneralService } from '../../shared/common/general.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +9,19 @@ import { AuthService } from '../../shared/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  username: any;
+
+  constructor(private authService: AuthService, private generalService: GeneralService) { }
 
   logout() {
     this.authService.logout();
   }
 
   ngOnInit() {
+    this.generalService.userNameValue.subscribe((value) => {
+      this.username = value;
+    });
   }
+
 
 }
