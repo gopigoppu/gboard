@@ -11,6 +11,8 @@ export class AuthService {
 
   setToken(token: string) {
     localStorage.setItem(this.storageKey, token);
+    const time_to_login = Date.now() + 86400000;
+    localStorage.setItem('timer', JSON.stringify(time_to_login));
   }
 
   getToken() {
@@ -24,6 +26,15 @@ export class AuthService {
 
   getUsername() {
     return localStorage.getItem('user');
+  }
+
+  checkJWT() {
+    const timer = JSON.parse(localStorage.getItem('timer'));
+    if (timer && (Date.now() > timer)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getUserId() {

@@ -80,7 +80,7 @@ function apiRouter(database) {
         username: result.username
       };
 
-      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
+      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 
       return res.json({
         message: 'successfully authenticated',
