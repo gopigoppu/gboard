@@ -7,7 +7,7 @@ function apiRouter(database) {
   const router = express.Router();
 
   router.use(
-    checkJwt({ secret: process.env.JWT_SECRET }).unless({ path: '/api/login' })
+    checkJwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/api/login', '/api/signup'] })
   );
 
   router.use((err, req, res, next) => {
@@ -23,8 +23,10 @@ function apiRouter(database) {
     });
   });
 
-  router.post('/users', (req, res) => {
+  router.post('/signup', (req, res) => {
     const user = req.body;
+    user.password = bcrypt.hashSync(user.password, 10)
+    console.log(user.password);
     const usersCollection = database.collection('users');
     usersCollection.insertOne(user, (err, r) => {
       if (err) {

@@ -21,6 +21,10 @@ export class ApiService {
     return this.post('board', board);
   }
 
+  addUser(user) {
+    return this.post('signup', user);
+  }
+
 
 
   get(url: string) {
